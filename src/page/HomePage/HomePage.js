@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { fetchTrending } from "components/api/api";
 import { GalleryTrendImgage, Image } from "./HomePage.styled";
 
@@ -8,8 +8,9 @@ const sizeImage = 'w500';
 
 export const HomePage = () => {
     const [trends, setTrends] = useState(null);
+    // let [searchParams, setSearchParams] = useSearchParams();
+    // console.log(searchParams.get('item'));
     
-
     useEffect (() => {
         const Trending = async() => {
             try {
@@ -21,7 +22,6 @@ export const HomePage = () => {
         Trending();
     }, []);
 
-    // console.log(trends);
     return (
         <>
         <h1>Новинки</h1>
@@ -34,8 +34,6 @@ export const HomePage = () => {
             </Link>
             </Image>)}
         </GalleryTrendImgage>
-
-        {/* <fetchMovies movie_id={() => trends.id}/>  */}
         </>
     )
 }
