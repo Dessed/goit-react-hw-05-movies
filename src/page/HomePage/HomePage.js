@@ -26,11 +26,11 @@ export const HomePage = () => {
         <>
         <h1>Новинки</h1>
         <GalleryTrendImgage>
-            {trends && trends.map(movie => 
-            <Image key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>
-            <img src={`${BASE_URL}/${sizeImage}${movie.backdrop_path}`} alt={movie.title || movie.name}/>
-            <p>{movie.title || movie.name}</p>
+            {trends && trends.map(({id, backdrop_path, title, name}) => 
+            <Image key={id}>
+            <Link to={`/movies/${id}`}>
+            <img src={`${BASE_URL}/${sizeImage}${backdrop_path}`} alt={title || name}/>
+            <p>{title || name}</p>
             </Link>
             </Image>)}
         </GalleryTrendImgage>

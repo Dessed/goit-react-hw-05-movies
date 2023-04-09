@@ -1,4 +1,5 @@
-import { useEffect, useState, useParams } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { fetchMoviesWord } from "components/api/api";
 
 const BASE_URL = 'https://image.tmdb.org/t/p/';
@@ -10,16 +11,13 @@ export const MoviesPage = () => {
     // const {movieId} = useParams();
     // console.log(movieId);
     console.log(dataMovie);
-
-    const handleChange = e => {
-        console.log(e.target.value);
-        // setName(e.currentTarget.value);
-    }; 
     
     const handleSubmit = e => {
         e.preventDefault();
         console.log("Ho ho ho");
-        setName(e.currentTarget.value);
+        const form = e.currentTarget;
+        setName(form.elements.name.value);
+
         console.log(name);
     };
 
@@ -40,20 +38,21 @@ export const MoviesPage = () => {
             <input
                 type="text"
                 autoComplete="off"
+                name="name"
                 autoFocus
-                placeholder="Введите название фильма"
-                onChange={handleChange}>
+                placeholder="Введите название фильма">
             </input>
 
             <button type='submit'>Поиск</button>
         </form>
 
         {dataMovie && 
-        <ul> {dataMovie.results?.map(({title, backdrop_path, release_date, vote_average, genres, overview}) =>
+        <ul> {dataMovie.results?.map(({id, title, backdrop_path, release_date, vote_average, genres, overview}) =>
             <li>
+               <Link to={`/movies/${id}`}>
                <p> {title || name} </p>
-
                <img src={`${BASE_URL}/${sizeImage}${backdrop_path}`} alt={title || name}/>
+               </Link>
 
                <p> {release_date} </p>
 
